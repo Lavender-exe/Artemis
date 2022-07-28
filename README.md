@@ -32,8 +32,8 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - [Seclists](https://github.com/danielmiessler/SecLists)
 - [Nmap](https://github.com/nmap/nmap)
 - [Ffuf](https://github.com/ffuf/ffuf/)
-- [OWASP Amass](https://github.com/OWASP/Amass)
-- [Massdns](https://github.com/blechschmidt/massdns)
+- ~~[OWASP Amass](https://github.com/OWASP/Amass)~~
+- ~~[Massdns](https://github.com/blechschmidt/massdns)~~
 
 ## Installation
 
