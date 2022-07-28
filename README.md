@@ -31,7 +31,7 @@ To-Do List:
 ## Installation
 
 ```sh
-git clone 
+git clone https://github.com/Lavender-exe/Artemis.git
 chmod +x Artemis.sh
 ```
 
