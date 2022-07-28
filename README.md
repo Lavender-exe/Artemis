@@ -4,18 +4,18 @@
 
 Artemis is a project designed to trick my brain into learning scripting while convincing myself that this is saving me time and effort rather than manually typing commands
 
-Artemis Can:
+**Artemis Can:**
 
 - Scan targets using Nmap
 - Fuzz directories and DNS
 - Run vulnerability scans on a target or website using Nmap scripts and Nikto
 
-Artemis Cannot:
+**Artemis Cannot:**
 
 - Filter ffuf outputs (fc, fs, etc)
 - Brute force
 
-To-Do List:
+**To-Do List:**
 
 - Use dig / nslookup to find domains
 - Shodan option
@@ -35,7 +35,7 @@ git clone https://github.com/Lavender-exe/Artemis.git
 chmod +x Artemis.sh
 ```
 
-Set Artemis as an alias:
+**Set Artemis as an alias:**
 
 \#1 Temporary Method:
 
@@ -55,3 +55,7 @@ Add this to your custom aliases:
 ```sh
 alias Artemis='PATH_TO_FILE/Artemis.sh'
 ```
+
+### Note
+
+Artemis is under active development, bugs are to be expected.
