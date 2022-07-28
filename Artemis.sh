@@ -76,7 +76,18 @@ nmapRecon() {
 
 niktoRecon(){
 	echo "[*] Scanning with Nikto"
-	nikto -h $IP -C ALL
+	echo "[?] Custom Port? (y/n) * Default 80 *"
+	read Answer
+	
+	if [ "$Answer" == "y"];
+		then
+			echo "[!] Enter Port:"
+			read PORT
+			nikto -h http://$IP:$PORT/ -C ALL
+		
+		else
+			nikto -h http://$IP/ -C ALL
+	fi
 }
 
 ffufFuzzDomain(){
@@ -86,12 +97,14 @@ ffufFuzzDomain(){
 	if [ "$Answer" == "y" ];
 		then
 			echo "[!] Enter Port:"
-			read $PORT
-				ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf-domain-1.json
-				ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r  -of Scans/ffuf-domain-2.json
-	else
-		ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf-domain-1.json
-		ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r  -of Scans/ffuf-domain-2.json
+			read PORT
+			
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf-domain-1.json
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r  -of Scans/ffuf-domain-2.json
+		
+		else
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf-domain-1.json
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r  -of Scans/ffuf-domain-2.json
 	fi
 }
 
@@ -102,10 +115,11 @@ ffufFuzzDNS(){
 	if [ "$Answer" == "y" ];
 		then
 			echo "[!] Enter Port:"
-			read $PORT
+			read PORT
  			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$IP:$PORT.com/ -H “Host: FUZZ.$IP:$PORT.com” -of Scans/ffuf-dns.json
-	else
-	ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$IP.com/ -H “Host: FUZZ.$IP.com” -of Scans/ffuf-dns.json
+		
+		else
+			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$IP.com/ -H “Host: FUZZ.$IP.com” -of Scans/ffuf-dns.json
 	fi
 }
 
