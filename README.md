@@ -12,15 +12,16 @@ Artemis is a project designed to trick my brain into learning scripting while co
 
 **Artemis Cannot:**
 
-- Filter ffuf outputs (fc, fs, etc)
-- Brute force
+- Filter ffuf outputs (fc, fs, etc) *Yet*
+- Brute force params
 
 **To-Do List:**
 
 - Use dig / nslookup to find domains
 - Shodan option
 - More options and tools
-- Select the ports you want to use
+- ~~Select the ports you want to use~~
+- Custom wordlists
 
 ## Requirements
 
