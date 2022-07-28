@@ -22,12 +22,16 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - More options and tools
 - ~~Select the ports you want to use~~
 - Custom wordlists
+- Amass Integration for DNS Recon
+- Amass to MassDNS feed 
 
 ## Requirements
 
-- Seclists
-- Nmap
-- Ffuf
+- [Seclists](https://github.com/danielmiessler/SecLists)
+- [Nmap](https://github.com/nmap/nmap)
+- [Ffuf](https://github.com/ffuf/ffuf/)
+- [OWASP Amass](https://github.com/OWASP/Amass)
+- [Massdns](https://github.com/blechschmidt/massdns)
 
 ## Installation
 
@@ -60,3 +64,8 @@ alias Artemis='PATH_TO_FILE/Artemis.sh'
 ### Note
 
 Artemis is under active development, bugs are to be expected.
+
+## Contributions
+
+*Special Thanks to:*
+- Shubakki
