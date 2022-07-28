@@ -102,7 +102,7 @@ ffufFuzzDomain(){
 	clear
 	mkdir Scans/ffuf
 
-	echo "[*] Scanning with Ffuf"
+	echo "[*] Scanning Directories with Ffuf"
 	echo "[?] Custom Port? (y/n) * Default 80 *"
 	read Answer
 	if [ "$Answer" == "y" ];
@@ -110,27 +110,28 @@ ffufFuzzDomain(){
 			echo "[!] Enter Port:"
 			read PORT
 			
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf/ffuf-domain-1.json
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r -of Scans/ffuf/ffuf-domain-2.json
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -o Scans/ffuf/ffuf-domain-1.json -e .aspx,.html,.php,.txt
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r -o Scans/ffuf/ffuf-domain-2.json -e .aspx,.html,.php,.txt
 		
 		else
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -of Scans/ffuf/ffuf-domain-1.json
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/common.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r  -of Scans/ffuf/ffuf-domain-2.json
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -o Scans/ffuf/ffuf-domain-1.json -e .aspx,.html,.php,.txt
+			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r  -o Scans/ffuf/ffuf-domain-2.json -e .aspx,.html,.php,.txt
 	fi
 }
 
 ffufFuzzDNS(){
 	clear
+	echo "[*] Scanning DNS with Ffuf"
 	echo "[?] Custom Port? (y/n)"
 	read Answer
 	if [ "$Answer" == "y" ];
 		then
 			echo "[!] Enter Port:"
 			read PORT
- 			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$IP:$PORT.com/ -H “Host: FUZZ.$IP:$PORT.com” -of Scans/ffuf/ffuf-dns.json
+ 			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt:FUZZ -u http://$IP:$PORT.com/ -H “Host: FUZZ.$IP.com” -c -o Scans/ffuf/ffuf-dns.txt
 		
 		else
-			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$IP.com/ -H “Host: FUZZ.$IP.com” -of Scans/ffuf/ffuf-dns.json
+			ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt:FUZZ -u http://$IP.com/ -H “Host: FUZZ.$IP.com” -c -o Scans/ffuf/ffuf-dns.txt
 	fi
 }
 
@@ -143,7 +144,6 @@ continue(){
 
 badOption(){
 	echo "[-] The option you have chosen is not on the list."
-	clear
 }
 
 goodbye(){
@@ -160,7 +160,8 @@ until [ "$Options" == "0" ]; do
 	echo ""
 	echo "	[1] Machine/Server	"
 	echo "	[2] Website	"
-	echo "	[3] DNS	"
+	echo "	[3] Directory Fuzzing with Ffuf	"	
+	echo "	[4] DNS Enumeration with Ffuf	"
 	echo ""
 	echo "	[0] Exit	"
 	echo ""
@@ -172,8 +173,9 @@ until [ "$Options" == "0" ]; do
 
 	case $Options in
 		1) clear ; nmapRecon ;;
-		2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ;;
-		3) clear ; ffufFuzzDNS;;
+		2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ; ffufFuzzDNS ;;
+		3) clear ; ffufFuzzDomain ;;
+		4) clear ; ffufFuzzDNS;;
 		0) clear ; goodbye ; exit ;;
 		*) clear ; badOption ; continue ;
 
