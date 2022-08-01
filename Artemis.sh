@@ -87,6 +87,9 @@ read IP
 
 # Functions
 
+# ------------- Declared -------------
+
+
 # ------------- General -------------
 
 nmapRecon() {
@@ -115,6 +118,9 @@ sleep 1
 			nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml
 			xsltproc Scans/nmap/udp-nmap.xml -o Scans/nmap/udp-nmap.html
 	fi
+
+	echo "[*] View logs in: Scans/nmap/"
+	sleep 5
 }
 
 
@@ -139,6 +145,8 @@ niktoRecon(){
 		else
 			nikto -h http://$IP/ -C ALL >> Scans/nikto/nikto.md
 	fi
+	echo "[*] View logs in: Scans/nikto/"
+	sleep 5
 }
 
 ffufFuzzDomain(){
@@ -155,7 +163,8 @@ ffufFuzzDomain(){
 			
 			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
 			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
-		
+			echo "[*] View logs in: Scans/ffuf/"
+			sleep 5
 		else
 			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
 			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r   -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
@@ -176,7 +185,8 @@ ffufFuzzDNS(){
 	echo " "
 
  	ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$URL:$PORT -H 'Host: FUZZ.$URL' -c >> Scans/ffuf/ffuf-dns.txt
-	# ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u https://hackthebox.com -H "Host: FUZZ.hackthebox.com" -c >> Scans/ffuf/ffuf-dns.txt
+	echo "[*] View logs in: Scans/ffuf/"
+	sleep 5
 }
 
 # dnsEnumeration(){
