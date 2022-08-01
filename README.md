@@ -14,6 +14,7 @@ Artemis is a project designed to trick my brain into learning scripting while co
 
 - Filter ffuf outputs (fc, fs, etc) *Yet*
 - Brute force params
+- Brute force HTTPS
 
 **To-Do List:**
 
@@ -22,6 +23,7 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - More options and tools
 - ~~Select the ports you want to use~~
 - Custom wordlists
+- Add flags instead of menu options (Menu / CLI maybe?)
 
 **Fute Projects:**
 - Amass Integration for DNS Recon
