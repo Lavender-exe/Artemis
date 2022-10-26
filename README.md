@@ -25,7 +25,7 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - Custom wordlists
 - Add flags instead of menu options (Menu / CLI maybe?)
 
-**Fute Projects:**
+**Future Projects:**
 - Amass Integration for DNS Recon
 - Amass to MassDNS feed 
 
