@@ -68,6 +68,7 @@ alias Artemis='PATH_TO_FILE/Artemis.sh'
 ### Note
 
 Artemis is under active development, bugs are to be expected.
+This is currently working for the latest version of Kali - It might not work for you if some of the paths are not the same (Ffuf lists)
 
 ## Contributions
 
