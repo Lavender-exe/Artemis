@@ -87,6 +87,41 @@ read IP
 
 # Functions
 
+# ------------- Declared -------------
+
+continue(){
+	echo ""
+	echo "[!] Please press enter to continue..."
+	read
+	clear
+}
+
+help_usage(){
+	echo " Usage: Artemis (-h | --help
+						   -i | --ip
+						   -p | --port
+						   -u | --url
+						   -w | --wordlist)
+	"
+}
+
+badOption(){
+	echo "[-] The option you have chosen is not on the list."
+}
+
+goodbye(){
+	echo ""
+	echo "Until Next Time...👁‍"
+}
+
+default_fuzz(){
+	WORDLIST='/usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt'
+}
+
+default_dns(){
+	WORDLIST='/usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt'
+}
+
 # ------------- General -------------
 
 nmapRecon() {
@@ -115,6 +150,9 @@ sleep 1
 			nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml
 			xsltproc Scans/nmap/udp-nmap.xml -o Scans/nmap/udp-nmap.html
 	fi
+
+	echo "[*] View logs in: Scans/nmap/"
+	sleep 5
 }
 
 
@@ -139,6 +177,8 @@ niktoRecon(){
 		else
 			nikto -h http://$IP/ -C ALL >> Scans/nikto/nikto.md
 	fi
+	echo "[*] View logs in: Scans/nikto/"
+	sleep 5
 }
 
 ffufFuzzDomain(){
@@ -146,6 +186,8 @@ ffufFuzzDomain(){
 
 	echo "[*] Scanning Directories with Ffuf"
 	echo " "
+	echo "[+] Please enter a wordlist:"
+	read WORDLIST
 	echo "[?] Custom Port? (y/n) * Default 80 *"
 	read Answer
 	if [ "$Answer" == "y" ];
@@ -153,12 +195,13 @@ ffufFuzzDomain(){
 			echo "[!] Enter Port:"
 			read PORT
 			
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
-		
+			ffuf -w $WORDLIST:FUZZ -u http://$IP:$PORT/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
+			ffuf -w $WORDLIST:FUZZ -u http://$IP:$PORT/FUZZ/ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
+			echo "[*] View logs in: Scans/ffuf/"
+			sleep 5
 		else
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
-			ffuf -w /usr/share/seclists/Discovery/Web-Content/directory-list-2.3-medium.txt:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r   -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
+			ffuf -w $WORDLIST:FUZZ -u http://$IP/FUZZ -v -c --recursion-depth 2 -r -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-1.txt
+			ffuf -w $WORDLIST:FUZZ -u http://$IP/FUZZ/ -v -c --recursion-depth 2 -r   -e .aspx,.html,.php,.txt >> Scans/ffuf/ffuf-domain-2.txt
 	fi
 }
 
@@ -167,16 +210,19 @@ ffufFuzzDNS(){
 
 	echo "[*] Scanning DNS with Ffuf"
 	echo " "
-
-	echo "[!] Enter URL: (Example: hackthebox.com)" 
+	
+		echo "[+] Please enter a wordlist:"
+	read WORDLIST
+		echo "[!] Enter URL: (Example: hackthebox.com)" 
 	read URL
-	echo "[!] Enter Port: (Example: '8080' Default '80')"
+		echo "[!] Enter Port: (Example: '8080' Default '80')"
 	read PORT
 
 	echo " "
 
- 	ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u http://$URL:$PORT -H 'Host: FUZZ.$URL' -c >> Scans/ffuf/ffuf-dns.txt
-	# ffuf -w /usr/share/seclists/Discovery/DNS/subdomains-top1million-20000.txt -u https://hackthebox.com -H "Host: FUZZ.hackthebox.com" -c >> Scans/ffuf/ffuf-dns.txt
+ 	ffuf -w $WORDLIST -u http://$URL:$PORT -H 'Host: FUZZ.$URL' -c >> Scans/ffuf/ffuf-dns.txt
+	echo "[*] View logs in: Scans/ffuf/"
+	sleep 5
 }
 
 # dnsEnumeration(){
@@ -205,22 +251,6 @@ ffufFuzzDNS(){
 # 	amass intel -whois -d $URL -v -oA Scans/amass/domains_scan
 # }
 
-continue(){
-	echo ""
-	echo "[!] Please press enter to continue..."
-	read
-	clear
-}
-
-badOption(){
-	echo "[-] The option you have chosen is not on the list."
-}
-
-goodbye(){
-	echo ""
-	echo "Until Next Time...👁‍"
-}
-
 # ------------- Options -------------
 
 until [ "$Options" == "0" ]; do
@@ -241,18 +271,29 @@ until [ "$Options" == "0" ]; do
 	
 	echo ""
 
-# ------------- Option Cases -------------
+# ------------- Option Cases - list -------------
+if [ ! $1 ]
+		case $Options in
+			1) clear ; nmapRecon ;;
+			2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ; ffufFuzzDNS;; #dnsEnumeration ; domainEnumeration ;;
+			3) clear ; nmapRecon ;;
+			4) clear ; ffufFuzzDomain ;;
+			5) clear ; ffufFuzzDNS;;
+			# 5) clear ; dnsEnumeration;;
+			0) clear ; goodbye ; exit ;;
+			*) clear ; badOption ; continue ;
 
-	case $Options in
-		1) clear ; nmapRecon ;;
-		2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ; ffufFuzzDNS;; #dnsEnumeration ; domainEnumeration ;;
-		3) clear ; nmapRecon ;;
-		4) clear ; ffufFuzzDomain ;;
-		5) clear ; ffufFuzzDNS;;
-		# 5) clear ; dnsEnumeration;;
-		0) clear ; goodbye ; exit ;;
-		*) clear ; badOption ; continue ;
+		esac
+	done
+# ------------- Option Cases - flags -------------
 
-	esac
-
+while getopts 'wpu:i' flag; do
+  case "${flag}" in
+    -i | --ip) IP=$1 ;;
+    -w | --wordlist) WORDLIST=$2 ;;
+    -p | --port) $PORT=$3 ;;
+    -u | --url) $URL=$4 ;;
+	-h | --help) help_usage;;
+    *) error "Unexpected option ${flag}" ;;
+  esac
 done
