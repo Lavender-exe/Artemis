@@ -73,4 +73,4 @@ This is currently working for the latest version of Kali - It might not work for
 ## Contributions
 
 *Special Thanks to:*
-- Shubakki
+- [Shubakki](https://github.com/shubakki/)
