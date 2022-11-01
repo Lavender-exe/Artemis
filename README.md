@@ -38,6 +38,7 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - ~~[Massdns](https://github.com/blechschmidt/massdns)~~
 
 ## Installation
+The code works for Kali Linux as it was made on this OS. If it does not work for you then you will need to change the directories listed in the program to where you have your scripts.
 
 ```sh
 git clone https://github.com/Lavender-exe/Artemis.git
