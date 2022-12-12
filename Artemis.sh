@@ -146,9 +146,9 @@ sleep 1
 	echo "[?] Would you like to scan for UDP? (y/n)"
 	read Answer
 	if [ "$Answer" == "y" ];
-		then
-			nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml
-			xsltproc Scans/nmap/udp-nmap.xml -o Scans/nmap/udp-nmap.html
+	then
+		sudo nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml
+		xsltproc Scans/nmap/udp-nmap.xml -o Scans/nmap/udp-nmap.html
 	fi
 
 	echo "[*] View logs in: Scans/nmap/"
