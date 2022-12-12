@@ -272,28 +272,28 @@ until [ "$Options" == "0" ]; do
 	echo ""
 
 # ------------- Option Cases - list -------------
-if [ ! $1 ]
-		case $Options in
-			1) clear ; nmapRecon ;;
-			2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ; ffufFuzzDNS;; #dnsEnumeration ; domainEnumeration ;;
-			3) clear ; nmapRecon ;;
-			4) clear ; ffufFuzzDomain ;;
-			5) clear ; ffufFuzzDNS;;
-			# 5) clear ; dnsEnumeration;;
-			0) clear ; goodbye ; exit ;;
-			*) clear ; badOption ; continue ;
+# if [ ! $1 ]
+	case $Options in
+		1) clear ; nmapRecon ;;
+		2) clear ; nmapRecon ; niktoRecon ; ffufFuzzDomain ; ffufFuzzDNS;; #dnsEnumeration ; domainEnumeration ;;
+		3) clear ; nmapRecon ;;
+		4) clear ; ffufFuzzDomain ;;
+		5) clear ; ffufFuzzDNS;;
+		# 5) clear ; dnsEnumeration;;
+		0) clear ; goodbye ; exit ;;
+		*) clear ; badOption ; continue ;
 
-		esac
-	done
+	esac
+done
 # ------------- Option Cases - flags -------------
 
-while getopts 'wpu:i' flag; do
-  case "${flag}" in
-    -i | --ip) IP=$1 ;;
-    -w | --wordlist) WORDLIST=$2 ;;
-    -p | --port) $PORT=$3 ;;
-    -u | --url) $URL=$4 ;;
-	-h | --help) help_usage;;
-    *) error "Unexpected option ${flag}" ;;
-  esac
-done
+#while getopts 'wpu:i' flag; do
+#  case "${flag}" in
+#    -i | --ip) IP=$1 ;;
+#    -w | --wordlist) WORDLIST=$2 ;;
+#    -p | --port) $PORT=$3 ;;
+#    -u | --url) $URL=$4 ;;
+#	-h | --help) help_usage;;
+#    *) error "Unexpected option ${flag}" ;;
+#  esac
+#done
