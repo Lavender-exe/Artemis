@@ -63,14 +63,14 @@ sudo nano ~/.bashrc
 Add this to your custom aliases:
 
 ```bash
-alias artemis='PATH_TO_FILE/Artemis.sh'
+alias artemis='sudo bash PATH_TO_FILE/Artemis.sh'
 ```
 
 One Liner:
 
 ```bash
-echo "alias artemis='~/PATH/TO/FILE/Artemis.sh'" >> ~/.bashrc
-echo "alias artemis='~/PATH/TO/FILE/Artemis.sh'" >> ~/.zshrc
+echo "alias artemis='sudo bash ~/PATH/TO/FILE/Artemis.sh'" >> ~/.bashrc
+echo "alias artemis='sudo bash ~/PATH/TO/FILE/Artemis.sh'" >> ~/.zshrc
 
 # You will have to do this once as a normal user and once as root.
 ```
