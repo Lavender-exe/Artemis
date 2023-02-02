@@ -49,21 +49,30 @@ chmod +x Artemis.sh
 
 \#1 Temporary Method:
 
-```sh
-export Artemis='Artemis.sh'
+```bash
+export artemis='Artemis.sh'
 ```
 
 \#2 Permanent Method (Requires sudo):
 
-```sh
+```bash
 echo $0 # Find out what your terminal uses (Bash/Zsh) then edit the one you need to
 sudo nano ~/.zshrc
 sudo nano ~/.bashrc
 ```
 Add this to your custom aliases:
 
-```sh
-alias Artemis='PATH_TO_FILE/Artemis.sh'
+```bash
+alias artemis='PATH_TO_FILE/Artemis.sh'
+```
+
+One Liner:
+
+```bash
+echo "alias artemis='~/PATH/TO/FILE/Artemis.sh'" >> ~/.bashrc
+echo "alias artemis='~/PATH/TO/FILE/Artemis.sh'" >> ~/.zshrc
+
+# You will have to do this once as a normal user and once as root.
 ```
 
 ### Note
