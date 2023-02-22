@@ -128,10 +128,10 @@ nmapRecon() {
 	echo "[*] Scanning with Nmap"
 	echo " "
 	
-	nmap -T4 -A -p- $IP -oN Scans/nmap/init-nmap.md -oX Scans/nmap/init-nmap.xml -vvv
+	nmap -T4 -A -p- $IP -oN Scans/nmap/init-nmap.md -oX Scans/nmap/init-nmap.xml -vvv -Pn --min-rate=5000
 	echo ""
 
-	sudo nmap -T4 -sC -sV --script vuln $IP -oN Scans/nmap/vuln-nmap.md -oX Scans/nmap/vuln-nmap.xml -vvv
+	sudo nmap -T4 -sC -sV --script vuln $IP -oN Scans/nmap/vuln-nmap.md -oX Scans/nmap/vuln-nmap.xml -vvv -Pn --min-rate=5000
 	echo ""
 
 sleep 1
@@ -147,7 +147,7 @@ sleep 1
 	read Answer
 	if [ "$Answer" == "y" ];
 	then
-		sudo nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml
+		sudo nmap -sUV -T4 -oN Scans/nmap/udp-nmap.md -oX Scans/nmap/udp-nmap.xml -Pn --min-rate=5000
 		xsltproc Scans/nmap/udp-nmap.xml -o Scans/nmap/udp-nmap.html
 	fi
 
