@@ -111,6 +111,7 @@ def niktoAll(url):
 
 
 if __name__ == "__main__":
+    banner()
     createFolders()
 
     parser = argparse.ArgumentParser(prog="artemis")
