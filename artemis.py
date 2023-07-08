@@ -139,7 +139,7 @@ if __name__ == "__main__":
     ffufSub_parser.add_argument("url", type=str, help="Target URL")
     ffufSub_parser.add_argument("wordlist", type=str, help="Wordlist File")
     
-    ffufSub_proxy_parser = subparsers.add_parser("ffuf_subproxy", help="Run FFUF directory fuzzing through proxy: %(prog)s ffuf_subproxy URL WORDLIST PROXY")
+    ffufSub_proxy_parser = subparsers.add_parser("ffuf_subproxy", help="Run FFUF subdomain fuzzing through proxy: %(prog)s ffuf_subproxy URL WORDLIST PROXY")
     ffufSub_proxy_parser.add_argument("url", type=str, help="Target URL")
     ffufSub_proxy_parser.add_argument("wordlist", type=str, help="Wordlist File")
     ffufSub_proxy_parser.add_argument("proxy", type=str, help="Proxychains or Burpsuite Proxy (HTTP)")
