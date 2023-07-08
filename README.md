@@ -10,20 +10,13 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - Fuzz directories and DNS
 - Run vulnerability scans on a target or website using Nmap scripts and Nikto
 
-**Artemis Cannot:**
-
-- Filter ffuf outputs (fc, fs, etc) *Yet*
-- Brute force params
-- Brute force HTTPS
-
 **To-Do List:**
 
-- Use dig / nslookup to find domains
-- Shodan option
-- More options and tools
-- ~~Select the ports you want to use~~
-- Custom wordlists
-- Add flags instead of menu options (Menu / CLI maybe?)
+- [ ] Shodan option
+- [ ] More options and tools
+- [x] Select the ports you want to use
+- [x] Custom wordlists
+- [x] Add flags instead of menu options (Menu / CLI maybe?)
 
 **Future Projects:**
 - Amass Integration for DNS Recon
@@ -40,9 +33,16 @@ Artemis is a project designed to trick my brain into learning scripting while co
 ## Installation
 The code works for Kali Linux as it was made on this OS. If it does not work for you then you will need to change the directories listed in the program to where you have your scripts.
 
+### Bash:
 ```bash
 git clone https://github.com/Lavender-exe/Artemis.git
 chmod +x Artemis.sh
+```
+
+### Python:
+```bash
+pip install -r requirements.txt
+python3 artemis.py --help/-h
 ```
 
 **Set Artemis as an alias:**
