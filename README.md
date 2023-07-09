@@ -23,23 +23,11 @@ Artemis is a project designed to trick my brain into learning scripting while co
 - Amass to MassDNS feed 
 
 ## Requirements
-
-- [Seclists](https://github.com/danielmiessler/SecLists)
-- [Nmap](https://github.com/nmap/nmap)
-- [Ffuf](https://github.com/ffuf/ffuf/)
-- ~~[OWASP Amass](https://github.com/OWASP/Amass)~~
-- ~~[Massdns](https://github.com/blechschmidt/massdns)~~
+- Python
+- Pip
 
 ## Installation
-The code works for Kali Linux as it was made on this OS. If it does not work for you then you will need to change the directories listed in the program to where you have your scripts.
 
-### Bash:
-```bash
-git clone https://github.com/Lavender-exe/Artemis.git
-chmod +x Artemis.sh
-```
-
-### Python:
 ```bash
 pip install -r requirements.txt
 python3 artemis.py --help/-h
@@ -50,7 +38,7 @@ python3 artemis.py --help/-h
 \#1 Temporary Method:
 
 ```bash
-export artemis='Artemis.sh'
+export artemis='artemis.py'
 ```
 
 \#2 Permanent Method (Requires sudo):
@@ -63,16 +51,14 @@ sudo nano ~/.bashrc
 Add this to your custom aliases:
 
 ```bash
-alias artemis='sudo bash PATH_TO_FILE/Artemis.sh'
+alias artemis='python3 PATH_TO_FILE/artemis.py'
 ```
 
 One Liner:
 
 ```bash
-echo "alias artemis='sudo bash ~/PATH/TO/FILE/Artemis.sh'" >> ~/.bashrc
-echo "alias artemis='sudo bash ~/PATH/TO/FILE/Artemis.sh'" >> ~/.zshrc
-
-# You will have to do this once as a normal user and once as root.
+echo "alias artemis='python3 ~/PATH/TO/FILE/artemis.py'" >> ~/.bashrc
+echo "alias artemis='python3 ~/PATH/TO/FILE/artemis.py'" >> ~/.zshrc
 ```
 
 ### Note
